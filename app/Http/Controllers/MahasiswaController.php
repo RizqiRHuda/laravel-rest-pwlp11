@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreMahasiswaRequests;
 use App\Http\Resources\MahasiswaResource;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -36,9 +36,22 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMahasiswaRequests $request)
     {
-        //
+        // return response()->json('hello');
+        return new MahasiswaResource(Mahasiswa::create(
+            [
+                'nim' => $request->nim,
+                'nama' => $request->nama,
+                // 'prodi' => $request->prodi,
+                'tgl_lahir' => $request->tgl_lahir,
+                'kelas_id' => $request->kelas_id,
+                'jurusan' => $request->jurusan,
+                'email' => $request->email,
+                'no_hp' => $request->no_hp,
+                // 'kelas_id' => $request->kelas,
+            ]
+        ));
     }
 
     /**
